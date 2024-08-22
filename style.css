@@ -31,6 +31,6 @@ margin: 1em;
 #player-score, #opponent-score{
     font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
     color: orange;
-    -webkit-text-stroke: 0.8px purple;
+    -webkit-text-stroke: 1px purple;
     font-size: 1em
 }
