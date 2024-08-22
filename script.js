@@ -3,7 +3,7 @@ const NUMBER_OF_CARDS_IN_HAND = 3;
 const INDEX_OF_USER_HAND = 0;
 const INDEX_OF_CPU_HAND = 1;
 const CARD_NUMBERS = [2, 3, 4, 5, 6, 7, 8, 9, 10, 'J', 'Q', 'K', 'A'];
-const CARD_SUITS = ['corazones', 'diamantes', 'tréboles', 'picas'];
+const CARD_SUITS = ['hearts', 'diamonds', 'clubs', 'spades'];
 
 
 function createCard(cardNumbers, cardSuits){
