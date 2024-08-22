@@ -13,3 +13,11 @@ margin: 1em;
     color: orange;
     -webkit-text-stroke: 2px purple;
 }
+.game-controls{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+#draw-card, #end-turn, #reset-game{
+    margin: 1.5em;
+}
