@@ -1,0 +1,36 @@
+body {
+    background-color: green;
+}
+.title-container {
+display: flex;
+align-items: center;
+justify-content: center;
+margin: 1em;
+}
+#title-propierties{
+    font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    font-size: 6em;
+    color: orange;
+    -webkit-text-stroke: 2px purple;
+}
+.game-controls{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+#draw-card, #end-turn, #reset-game{
+    margin: 1.5em;
+}
+.game-status{
+    font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    color: orange;
+    -webkit-text-stroke: 1px purple;
+    font-size: 2em
+}
+
+#player-score, #opponent-score{
+    font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    color: orange;
+    -webkit-text-stroke: 0.8px purple;
+    font-size: 1em
+}
