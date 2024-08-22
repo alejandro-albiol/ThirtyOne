@@ -1,5 +1,7 @@
 const NUMBER_OF_CARDS_IN_DECK = 52;
 const NUMBER_OF_CARDS_IN_HAND = 3;
+const INDEX_OF_USER_HAND = 0;
+const INDEX_OF_CPU_HAND = 1;
 const CARD_NUMBERS = [2, 3, 4, 5, 6, 7, 8, 9, 10, 'J', 'Q', 'K', 'A'];
 const CARD_SUITS = ['corazones', 'diamantes', 'tréboles', 'picas'];
 
@@ -41,19 +43,27 @@ function createDeck(numberOfCardsInDeck){
 function createFirstHand(NUMBER_OF_CARDS_IN_HAND, deck){
     let playerHand = [];
     let cpuHand = [];
-
+    let firstHand = [];
     for(let i = 0; i < NUMBER_OF_CARDS_IN_HAND; i++){
         let drawPlayerCard = deck.pop()
         playerHand.push(drawPlayerCard);
         let drawCpuCard = deck.pop()
         cpuHand.push(drawCpuCard);
     }
-    console.log(playerHand);
-    console.log(cpuHand);
+    firstHand.push(playerHand);
+    firstHand.push(cpuHand);
+
+    return firstHand;
 }
 
 let deck = createDeck(NUMBER_OF_CARDS_IN_DECK);
 console.log(deck);
 
-let firstHand = createFirstHand(NUMBER_OF_CARDS_IN_HAND, deck);
-console.log(deck)
+let firstUserAndCpuHand = createFirstHand(NUMBER_OF_CARDS_IN_HAND, deck);
+
+let firstUserHand = firstUserAndCpuHand[INDEX_OF_USER_HAND];
+let firstCpuHand = firstUserAndCpuHand[INDEX_OF_CPU_HAND];
+
+console.log(firstUserHand);
+console.log(firstCpuHand);
+console.log(deck);
