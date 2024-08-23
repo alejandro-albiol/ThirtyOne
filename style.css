@@ -21,11 +21,12 @@ margin: 1em;
 #draw-card, #end-turn, #reset-game{
     margin: 1.5em;
 }
-.game-status{
-    font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+.game-status {
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
     color: orange;
-    -webkit-text-stroke: 0,3px purple;
-    font-size: 1em
+    -webkit-text-stroke: 0.3px purple;
+    font-size: 1em;
+    text-align: right;
 }
 
 #player-score, #opponent-score{
