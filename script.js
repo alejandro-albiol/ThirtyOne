@@ -87,36 +87,31 @@ function MostCommonSuitInHand(hand, suits){
     return suits[majoritySuitIndex];
 }
 
+function getCardValue(cardValue) {
+    if (typeof cardValue == 'number') {
+        return cardValue;
+    } else if (cardValue == 'J' || cardValue == 'Q' || cardValue == 'K') {
+        return VALUE_OF_J_Q_K_CARDS;
+    } else {
+        return VALUE_OF_AS_CARD;
+    }
+}
+
 function handScore(hand) {
     let majoritySuit = MostCommonSuitInHand(hand, CARD_SUITS);
     let majoritySuitPoints = 0;
     let maxSingleCardPoints = 0;
 
     for (let i = 0; i < hand.length; i++) {
-        let cardValue = hand[i][INDEX_OF_NUMBER_IN_CARD];
+        let cardValue = getCardValue(hand[i][INDEX_OF_NUMBER_IN_CARD]);
         let cardSuit = hand[i][INDEX_OF_SUIT_IN_CARD];
 
         if (cardSuit == majoritySuit) {
-            if (typeof cardValue == 'number') {
-                majoritySuitPoints += cardValue;
-            } else if (cardValue == 'J' || cardValue == 'Q' || cardValue == 'K') {
-                majoritySuitPoints += VALUE_OF_J_Q_K_CARDS;
-            } else {
-                majoritySuitPoints += VALUE_OF_AS_CARD;
-            }
+            majoritySuitPoints += cardValue;
         }
 
-        let cardPoints = 0;
-        if (typeof cardValue == 'number') {
-            cardPoints = cardValue;
-        } else if (cardValue == 'J' || cardValue == 'Q' || cardValue == 'K') {
-            cardPoints = VALUE_OF_J_Q_K_CARDS;
-        } else {
-            cardPoints = VALUE_OF_AS_CARD;
-        }
-
-        if (cardPoints > maxSingleCardPoints) {
-            maxSingleCardPoints = cardPoints;
+        if (cardValue > maxSingleCardPoints) {
+            maxSingleCardPoints = cardValue;
         }
     }
 
