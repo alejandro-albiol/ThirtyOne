@@ -45,7 +45,7 @@ function createFirstHand(numberOfCardsInHand, deck){
     let playerHand = [];
     let cpuHand = [];
     let firstHand = [];
-    
+
     for(let i = 0; i < numberOfCardsInHand; i++){
         let drawPlayerCard = deck.pop()
         playerHand.push(drawPlayerCard);
@@ -58,26 +58,70 @@ function createFirstHand(numberOfCardsInHand, deck){
     return firstHand;
 }
 
-function handScore(hand){
-    const INDEX_OF_FIRST_CARD_IN_HAND = 0
-    let cardPoints = 0;
-    let initialSuit = hand[INDEX_OF_FIRST_CARD_IN_HAND][INDEX_OF_SUIT_IN_CARD]
+function MostCommonSuitInHand(hand, suits){
+    const INDEX_OF_HEARTS_SUIT = 0;
+    const INDEX_OF_DIAMONDS_SUIT = 1;
+    const INDEX_OF_CLUBS_SUIT = 2;
+    const INDEX_OF_SPADES_SUIT = 3;
+    let suitsCounter = [0, 0, 0, 0];
 
     for(let i = 0; i < hand.length; i++){
+        let cardSuit = hand[i][INDEX_OF_SUIT_IN_CARD];
+        let suitIndex = suits.indexOf(cardSuit);
+
+        if(suitIndex != -1) {
+            suitsCounter[suitIndex]++;
+        }
+    }
+
+    let maxCount = 0;
+    let majoritySuitIndex = 0;
+
+    for (let i = 0; i < suitsCounter.length; i++) {
+        if (suitsCounter[i] > maxCount) {
+            maxCount = suitsCounter[i];
+            majoritySuitIndex = i;
+        }
+    }
+
+    return suits[majoritySuitIndex];
+}
+
+function handScore(hand) {
+    let majoritySuit = MostCommonSuitInHand(hand, CARD_SUITS);
+    let majoritySuitPoints = 0;
+    let maxSingleCardPoints = 0;
+
+    for (let i = 0; i < hand.length; i++) {
         let cardValue = hand[i][INDEX_OF_NUMBER_IN_CARD];
         let cardSuit = hand[i][INDEX_OF_SUIT_IN_CARD];
-        if(initialSuit == cardSuit){
-            if(typeof cardValue == 'number'){
-                cardPoints += parseInt(hand[i]);
-            }else if(cardValue == 'J' || cardValue == 'Q' || cardValue == 'K'){
-                cardPoints += VALUE_OF_J_Q_K_CARDS;
-            }else{
-                cardPoints += VALUE_OF_AS_CARD;
+
+        if (cardSuit == majoritySuit) {
+            if (typeof cardValue == 'number') {
+                majoritySuitPoints += cardValue;
+            } else if (cardValue == 'J' || cardValue == 'Q' || cardValue == 'K') {
+                majoritySuitPoints += VALUE_OF_J_Q_K_CARDS;
+            } else {
+                majoritySuitPoints += VALUE_OF_AS_CARD;
             }
+        }
+
+        let cardPoints = 0;
+        if (typeof cardValue == 'number') {
+            cardPoints = cardValue;
+        } else if (cardValue == 'J' || cardValue == 'Q' || cardValue == 'K') {
+            cardPoints = VALUE_OF_J_Q_K_CARDS;
+        } else {
+            cardPoints = VALUE_OF_AS_CARD;
+        }
+
+        if (cardPoints > maxSingleCardPoints) {
+            maxSingleCardPoints = cardPoints;
+        }
     }
-    }
-    return cardPoints;
-} 
+
+    return Math.max(majoritySuitPoints, maxSingleCardPoints);
+}
 
 let deck = createDeck(NUMBER_OF_CARDS_IN_DECK);
 
