@@ -8,6 +8,14 @@ const INDEX_OF_NUMBER_IN_CARD = 0;
 const INDEX_OF_SUIT_IN_CARD = 1;
 const VALUE_OF_J_Q_K_CARDS = 10;
 const VALUE_OF_AS_CARD = 11;
+const POINTS_TO_WIN = 10;
+
+let deck;
+let firstUserAndCpuHand;
+let firstUserHand;
+let firstCpuHand;
+let userHandScore;
+let CpuHandScore;
 
 function createCard(cardNumbers, cardSuits){
     let lastNumbersIndex = cardNumbers.length - 1
@@ -118,20 +126,62 @@ function handScore(hand) {
     return Math.max(majoritySuitPoints, maxSingleCardPoints);
 }
 
-let deck = createDeck(NUMBER_OF_CARDS_IN_DECK);
+function updateGlobalScore(){
+    let userScoreCounter = parseInt(document.querySelector("#player-score").innerHTML);
+    let cpuScoreCounter = parseInt(document.querySelector("#opponent-score").innerHTML);
 
-let firstUserAndCpuHand = createFirstHand(NUMBER_OF_CARDS_IN_HAND, deck);
+    if(userScoreCounter < POINTS_TO_WIN  && cpuScoreCounter < POINTS_TO_WIN){
+        if(userHandScore > CpuHandScore){
+            let playerScoreElement = document.querySelector("#player-score");
+            let currentUserScore = parseInt(playerScoreElement.innerHTML);
+            playerScoreElement.innerHTML = currentUserScore + 1;
+            userScoreCounter++;
+        }else if(CpuHandScore > userHandScore){
+            let cpuScoreElement = document.querySelector("#opponent-score");
+            let currentCpuScore = parseInt(cpuScoreElement.innerHTML);
+            cpuScoreElement.innerHTML = currentCpuScore + 1;
+            cpuScoreCounter++;
+        }else{
+            window.alert("Is a draw!");
+        }}else{
+            if(userScoreCounter == POINTS_TO_WIN){
+                window.alert("Congratulations, you win!");
+            }else if(cpuScoreCounter == POINTS_TO_WIN){
+                window.alert("You lose, Game Over!");
+            }
+        }
+}
 
-let firstUserHand = firstUserAndCpuHand[INDEX_OF_USER_HAND];
-let firstCpuHand = firstUserAndCpuHand[INDEX_OF_CPU_HAND];
+function initialRoundCreator(){
+    deck = createDeck(NUMBER_OF_CARDS_IN_DECK);
 
-let userHandScore = handScore(firstUserHand);
-let CpuHandScore = handScore(firstCpuHand);
+    firstUserAndCpuHand = createFirstHand(NUMBER_OF_CARDS_IN_HAND, deck);
 
-console.log("User hand:");
-console.log(firstUserHand);
-console.log("CPU hand:");
-console.log(firstCpuHand);
-console.log(deck);
-console.log(`User score: ${userHandScore}`);
-console.log(`CPU score: ${CpuHandScore}`);
+    firstUserHand = firstUserAndCpuHand[INDEX_OF_USER_HAND];
+    firstCpuHand = firstUserAndCpuHand[INDEX_OF_CPU_HAND];
+    
+    userHandScore = handScore(firstUserHand);
+    CpuHandScore = handScore(firstCpuHand);
+
+    console.log("User hand:");
+    console.log(firstUserHand);
+    console.log("CPU hand:");
+    console.log(firstCpuHand);
+    console.log(deck);
+    console.log(`User score: ${userHandScore}`);
+    console.log(`CPU score: ${CpuHandScore}`);
+}
+
+deck = createDeck(NUMBER_OF_CARDS_IN_DECK)
+firstUserAndCpuHand = createFirstHand(NUMBER_OF_CARDS_IN_HAND, deck);
+firstUserHand = firstUserAndCpuHand[INDEX_OF_USER_HAND];
+firstCpuHand = firstUserAndCpuHand[INDEX_OF_CPU_HAND];
+userHandScore = handScore(firstUserHand);
+CpuHandScore = handScore(firstCpuHand);
+
+initialRoundCreator();
+
+document.querySelector("#end-turn").addEventListener("click", (event)=>{
+    updateGlobalScore();
+    initialRoundCreator();
+})
