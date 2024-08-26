@@ -80,7 +80,7 @@ function MostCommonSuitInHand(hand, suits){
     let maxCount = 0;
     let majoritySuitIndex = 0;
 
-    for (let i = 0; i < suitsCounter.length; i++) {
+    for (let i = 0; i < suitsCounter.length; i++){
         if (suitsCounter[i] > maxCount) {
             maxCount = suitsCounter[i];
             majoritySuitIndex = i;
@@ -122,42 +122,33 @@ function handScore(hand) {
 }
 
 function updateGlobalScore(){
-    currentUserScore = parseInt(document.querySelector("#player-score").innerHTML);
-    currentCpuScore = parseInt(document.querySelector("#opponent-score").innerHTML);
     let roundFeedBack = " ";
 
-    if(currentUserScore < POINTS_TO_WIN && currentCpuScore < POINTS_TO_WIN ){
-        if(userHandScore > CpuHandScore){
-            let playerScoreElement = document.querySelector("#player-score");
-            let currentUserScore = parseInt(playerScoreElement.innerHTML);
-            playerScoreElement.innerHTML = currentUserScore + 1;
-            roundFeedBack += "You win this round!";
-        }else if(CpuHandScore > userHandScore){
-            let cpuScoreElement = document.querySelector("#opponent-score");
-            let currentCpuScore = parseInt(cpuScoreElement.innerHTML);
-            cpuScoreElement.innerHTML = currentCpuScore + 1;
-            roundFeedBack += "CPU win this round!";
-        }else{
-            roundFeedBack += "It's a draw.";
-        }}else{
-            if(currentUserScore == POINTS_TO_WIN){
-                window.alert("Congratulations, you win!");
-            }else{
-                window.alert("Game Over, you lose!");
-        }}
-        window.alert(roundFeedBack);
+    if(userHandScore > CpuHandScore){
+        let playerScoreElement = document.querySelector("#player-score");
+        let currentUserScore = parseInt(playerScoreElement.innerHTML);
+        playerScoreElement.innerHTML = currentUserScore + 1;
+        roundFeedBack += "You win this round!";
+    }else if(CpuHandScore > userHandScore){
+        let cpuScoreElement = document.querySelector("#opponent-score");
+        let currentCpuScore = parseInt(cpuScoreElement.innerHTML);
+        cpuScoreElement.innerHTML = currentCpuScore + 1;
+        roundFeedBack += "CPU win this round!";
+    }else{
+        roundFeedBack += "It's a draw.";
+    }
+    window.alert(roundFeedBack);
 }
 
 function initialRoundCreator(){
     deck = createDeck(NUMBER_OF_CARDS_IN_DECK);
-
     firstUserAndCpuHand = createFirstHand(NUMBER_OF_CARDS_IN_HAND, deck);
-
     firstUserHand = firstUserAndCpuHand[INDEX_OF_USER_HAND];
     firstCpuHand = firstUserAndCpuHand[INDEX_OF_CPU_HAND];
-    
     userHandScore = handScore(firstUserHand);
     CpuHandScore = handScore(firstCpuHand);
+    currentUserScore = parseInt(document.querySelector("#player-score").innerHTML);
+    currentCpuScore = parseInt(document.querySelector("#opponent-score").innerHTML);
 
     console.log("User hand:");
     console.log(firstUserHand);
@@ -168,9 +159,21 @@ function initialRoundCreator(){
     console.log(`CPU score: ${CpuHandScore}`);
 }
 
+function checkWinner(roundsToWin, userScore, cpuScore){
+    if(userScore < roundsToWin && cpuScore < roundsToWin ){
+        initialRoundCreator();
+    }else{
+            if(userScore == POINTS_TO_WIN){
+                window.alert("Congratulations, you win!");
+            }else{
+                window.alert("Game Over, you lose!");
+        }}
+}
+
 initialRoundCreator();
 
 document.querySelector("#end-turn").addEventListener("click", (event)=>{
+    event = 
     updateGlobalScore();
-    initialRoundCreator();
+    checkWinner(POINTS_TO_WIN, currentUserScore, currentCpuScore);
 })
