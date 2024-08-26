@@ -8,14 +8,9 @@ const INDEX_OF_NUMBER_IN_CARD = 0;
 const INDEX_OF_SUIT_IN_CARD = 1;
 const VALUE_OF_J_Q_K_CARDS = 10;
 const VALUE_OF_AS_CARD = 11;
-const POINTS_TO_WIN = 10;
+const POINTS_TO_WIN = 5;
 
-let deck;
-let firstUserAndCpuHand;
-let firstUserHand;
-let firstCpuHand;
-let userHandScore;
-let CpuHandScore;
+let deck, firstUserAndCpuHand, firstUserHand, firstCpuHand, userHandScore, CpuHandScore, currentCpuScore, currentUserScore;
 
 function createCard(cardNumbers, cardSuits){
     let lastNumbersIndex = cardNumbers.length - 1
@@ -127,29 +122,30 @@ function handScore(hand) {
 }
 
 function updateGlobalScore(){
-    let userScoreCounter = parseInt(document.querySelector("#player-score").innerHTML);
-    let cpuScoreCounter = parseInt(document.querySelector("#opponent-score").innerHTML);
+    currentUserScore = parseInt(document.querySelector("#player-score").innerHTML);
+    currentCpuScore = parseInt(document.querySelector("#opponent-score").innerHTML);
+    let roundFeedBack = " ";
 
-    if(userScoreCounter < POINTS_TO_WIN  && cpuScoreCounter < POINTS_TO_WIN){
+    if(currentUserScore < POINTS_TO_WIN && currentCpuScore < POINTS_TO_WIN ){
         if(userHandScore > CpuHandScore){
             let playerScoreElement = document.querySelector("#player-score");
             let currentUserScore = parseInt(playerScoreElement.innerHTML);
             playerScoreElement.innerHTML = currentUserScore + 1;
-            userScoreCounter++;
+            roundFeedBack += "You win this round!";
         }else if(CpuHandScore > userHandScore){
             let cpuScoreElement = document.querySelector("#opponent-score");
             let currentCpuScore = parseInt(cpuScoreElement.innerHTML);
             cpuScoreElement.innerHTML = currentCpuScore + 1;
-            cpuScoreCounter++;
+            roundFeedBack += "CPU win this round!";
         }else{
-            window.alert("Is a draw!");
+            roundFeedBack += "It's a draw.";
         }}else{
-            if(userScoreCounter == POINTS_TO_WIN){
+            if(currentUserScore == POINTS_TO_WIN){
                 window.alert("Congratulations, you win!");
-            }else if(cpuScoreCounter == POINTS_TO_WIN){
-                window.alert("You lose, Game Over!");
-            }
-        }
+            }else{
+                window.alert("Game Over, you lose!");
+        }}
+        window.alert(roundFeedBack);
 }
 
 function initialRoundCreator(){
@@ -172,16 +168,9 @@ function initialRoundCreator(){
     console.log(`CPU score: ${CpuHandScore}`);
 }
 
-deck = createDeck(NUMBER_OF_CARDS_IN_DECK)
-firstUserAndCpuHand = createFirstHand(NUMBER_OF_CARDS_IN_HAND, deck);
-firstUserHand = firstUserAndCpuHand[INDEX_OF_USER_HAND];
-firstCpuHand = firstUserAndCpuHand[INDEX_OF_CPU_HAND];
-userHandScore = handScore(firstUserHand);
-CpuHandScore = handScore(firstCpuHand);
-
 initialRoundCreator();
 
-document.querySelector("#end-turn").addEventListener("click", (event)=>{
-    updateGlobalScore();
-    initialRoundCreator();
-})
+    document.querySelector("#end-turn").addEventListener("click", (event)=>{
+        updateGlobalScore();
+        initialRoundCreator();
+    })
