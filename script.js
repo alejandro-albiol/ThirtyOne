@@ -1,5 +1,9 @@
 const CARD_NUMBERS = [2, 3, 4, 5, 6, 7, 8, 9, 10, 'J', 'Q', 'K', 'A'];
 const CARD_SUITS = ['hearts', 'diamonds', 'clubs', 'spades'];
+const INDEX_OF_HEARTS_SUIT = 0;
+const INDEX_OF_DIAMONDS_SUIT = 1;
+const INDEX_OF_CLUBS_SUIT = 2;
+const INDEX_OF_SPADES_SUIT = 3;
 const NUMBER_OF_CARDS_IN_DECK = 52;
 const NUMBER_OF_CARDS_IN_HAND = 3;
 const INDEX_OF_USER_HAND = 0;
@@ -62,10 +66,6 @@ function createFirstHand(numberOfCardsInHand, deck){
 }
 
 function MostCommonSuitInHand(hand, suits){
-    const INDEX_OF_HEARTS_SUIT = 0;
-    const INDEX_OF_DIAMONDS_SUIT = 1;
-    const INDEX_OF_CLUBS_SUIT = 2;
-    const INDEX_OF_SPADES_SUIT = 3;
     let suitsCounter = [0, 0, 0, 0];
 
     for(let i = 0; i < hand.length; i++){
@@ -170,7 +170,7 @@ function initialRoundCreator(){
 
 initialRoundCreator();
 
-    document.querySelector("#end-turn").addEventListener("click", (event)=>{
-        updateGlobalScore();
-        initialRoundCreator();
-    })
+document.querySelector("#end-turn").addEventListener("click", (event)=>{
+    updateGlobalScore();
+    initialRoundCreator();
+})
