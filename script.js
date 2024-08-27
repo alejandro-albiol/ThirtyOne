@@ -14,7 +14,7 @@ const VALUE_OF_J_Q_K_CARDS = 10;
 const VALUE_OF_AS_CARD = 11;
 const POINTS_TO_WIN = 5;
 
-let deck, firstUserAndCpuHand, firstUserHand, firstCpuHand, userHandScore, CpuHandScore, currentCpuScore, currentUserScore, suitElementInCard;
+let deck, firstUserAndCpuHand, firstUserHand, firstCpuHand, userHandScore, CpuHandScore, currentCpuScore, currentUserScore, numberElementInCardElementInCard, topSuitElementInCard, botSuitElementInCard;
 
 function createCard(cardNumbers, cardSuits){
     let lastNumbersIndex = cardNumbers.length - 1
@@ -66,10 +66,26 @@ function createFirstHand(numberOfCardsInHand, deck){
 }
 
 function showFirstHandNumber(){
-    let suitElementInCard = document.querySelectorAll(".number-container");
+    let numberElementInCard = document.querySelectorAll(".number-container");
     for( let i = 0; i <= firstUserHand.length - 1; i++){
-        suitElementInCard[i].innerHTML = firstUserHand[i][INDEX_OF_NUMBER_IN_CARD]
+        numberElementInCard[i].innerHTML = firstUserHand[i][INDEX_OF_NUMBER_IN_CARD]
     }
+}
+
+function showFirstHandSuit(){
+    let topSuitElementInCard = document.querySelectorAll("#top-suit-container");
+    for(let i = 0; i <= topSuitElementInCard.length - 1; i++){
+        topSuitElementInCard[i].classList.add(firstUserHand[i][INDEX_OF_SUIT_IN_CARD]);
+    }
+    let bottomSuitElementInCard = document.querySelectorAll("#bottom-suit-container");
+    for(let i = 0; i <= bottomSuitElementInCard.length - 1; i++){
+        bottomSuitElementInCard[i].classList.add(firstUserHand[i][INDEX_OF_SUIT_IN_CARD]);
+    }
+}
+
+function drawUserHand(){
+    showFirstHandNumber();
+    showFirstHandSuit();
 }
 
 function MostCommonSuitInHand(hand, suits){
@@ -160,7 +176,7 @@ function initialRoundCreator(){
         firstCpuHand = firstUserAndCpuHand[INDEX_OF_CPU_HAND];
         userHandScore = handScore(firstUserHand);
         CpuHandScore = handScore(firstCpuHand);
-        showFirstHandNumber();
+        drawUserHand();
 
         console.log("User hand:");
         console.log(firstUserHand);
