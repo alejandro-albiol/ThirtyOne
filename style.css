@@ -53,6 +53,9 @@ body {
 }
 
 .card {
+    display: flex;
+    align-items: center;
+    justify-content: center;
     background-color: antiquewhite;
     height: 336px; 
     width: 240px;   
@@ -61,6 +64,9 @@ body {
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
 
+.number-container{
+    font-size: 80px;
+}
 
 .suit-container{
     font-size: 2em;
