@@ -14,7 +14,7 @@ const VALUE_OF_J_Q_K_CARDS = 10;
 const VALUE_OF_AS_CARD = 11;
 const POINTS_TO_WIN = 5;
 
-let deck, firstUserAndCpuHand, firstUserHand, firstCpuHand, userHandScore, CpuHandScore, currentCpuScore, currentUserScore;
+let deck, firstUserAndCpuHand, firstUserHand, firstCpuHand, userHandScore, CpuHandScore, currentCpuScore, currentUserScore, suitElementInCard;
 
 function createCard(cardNumbers, cardSuits){
     let lastNumbersIndex = cardNumbers.length - 1
@@ -63,6 +63,13 @@ function createFirstHand(numberOfCardsInHand, deck){
     firstHand.push(cpuHand);
 
     return firstHand;
+}
+
+function showFirstHandNumber(){
+    let suitElementInCard = document.querySelectorAll(".number-container");
+    for( let i = 0; i <= firstUserHand.length - 1; i++){
+        suitElementInCard[i].innerHTML = firstUserHand[i][INDEX_OF_NUMBER_IN_CARD]
+    }
 }
 
 function MostCommonSuitInHand(hand, suits){
@@ -153,6 +160,7 @@ function initialRoundCreator(){
         firstCpuHand = firstUserAndCpuHand[INDEX_OF_CPU_HAND];
         userHandScore = handScore(firstUserHand);
         CpuHandScore = handScore(firstCpuHand);
+        showFirstHandNumber();
 
         console.log("User hand:");
         console.log(firstUserHand);
