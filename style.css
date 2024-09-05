@@ -5,12 +5,12 @@ body {
     display: flex;
     align-items: center;
     justify-content: center;
-    margin: 1em;
-    padding: 0em;
+    margin: 0em;
+    padding: -1em;
 }
 #title-propierties{
     font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
-    font-size: 6em;
+    font-size: 5em;
     color: orange;
     -webkit-text-stroke: 2px purple;
     margin-bottom: 1.5em;
