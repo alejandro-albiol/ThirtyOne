@@ -73,15 +73,20 @@ function showFirstHandNumber(){
 }
 
 function showFirstHandSuit(){
-    let topSuitElementInCard = document.querySelectorAll("#top-suit-container");
-    for(let i = 0; i <= topSuitElementInCard.length - 1; i++){
-        topSuitElementInCard[i].classList.add(firstUserHand[i][INDEX_OF_SUIT_IN_CARD]);
-    }
-    let bottomSuitElementInCard = document.querySelectorAll("#bottom-suit-container");
-    for(let i = 0; i <= bottomSuitElementInCard.length - 1; i++){
-        bottomSuitElementInCard[i].classList.add(firstUserHand[i][INDEX_OF_SUIT_IN_CARD]);
+    let topSuitElementInCard = document.querySelectorAll(".top-suit-container");
+    let bottomSuitElementInCard = document.querySelectorAll(".bottom-suit-container");
+
+    for(let i = 0; i < firstUserHand.length; i++){
+
+        topSuitElementInCard[i].classList.remove('hearts', 'diamonds', 'clubs', 'spades');
+        bottomSuitElementInCard[i].classList.remove('hearts', 'diamonds', 'clubs', 'spades');
+        
+        let suitClass = firstUserHand[i][INDEX_OF_SUIT_IN_CARD];
+        topSuitElementInCard[i].classList.add(suitClass);
+        bottomSuitElementInCard[i].classList.add(suitClass);
     }
 }
+
 
 function drawUserHand(){
     showFirstHandNumber();
