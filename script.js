@@ -145,7 +145,7 @@ function handScore(hand) {
 }
 
 function updateGlobalScore(){
-    let roundFeedBack = " ";
+    let roundFeedBack = `User score: ${userHandScore}\nCPU score: ${CpuHandScore}\n`;
 
     if(userHandScore > CpuHandScore){
         let playerScoreElement = document.querySelector("#player-score");
@@ -177,14 +177,6 @@ function initialRoundCreator(){
         userHandScore = handScore(firstUserHand);
         CpuHandScore = handScore(firstCpuHand);
         drawUserHand();
-
-        console.log("User hand:");
-        console.log(firstUserHand);
-        console.log("CPU hand:");
-        console.log(firstCpuHand);
-        console.log(deck);
-        console.log(`User score: ${userHandScore}`);
-        console.log(`CPU score: ${CpuHandScore}`);
 
     }else if(currentUserScore == POINTS_TO_WIN){
         window.alert("User Win!");
