@@ -73,15 +73,20 @@ function showFirstHandNumber(){
 }
 
 function showFirstHandSuit(){
-    let topSuitElementInCard = document.querySelectorAll("#top-suit-container");
-    for(let i = 0; i <= topSuitElementInCard.length - 1; i++){
-        topSuitElementInCard[i].classList.add(firstUserHand[i][INDEX_OF_SUIT_IN_CARD]);
-    }
-    let bottomSuitElementInCard = document.querySelectorAll("#bottom-suit-container");
-    for(let i = 0; i <= bottomSuitElementInCard.length - 1; i++){
-        bottomSuitElementInCard[i].classList.add(firstUserHand[i][INDEX_OF_SUIT_IN_CARD]);
+    let topSuitElementInCard = document.querySelectorAll(".top-suit-container");
+    let bottomSuitElementInCard = document.querySelectorAll(".bottom-suit-container");
+
+    for(let i = 0; i < firstUserHand.length; i++){
+
+        topSuitElementInCard[i].classList.remove('hearts', 'diamonds', 'clubs', 'spades');
+        bottomSuitElementInCard[i].classList.remove('hearts', 'diamonds', 'clubs', 'spades');
+        
+        let suitClass = firstUserHand[i][INDEX_OF_SUIT_IN_CARD];
+        topSuitElementInCard[i].classList.add(suitClass);
+        bottomSuitElementInCard[i].classList.add(suitClass);
     }
 }
+
 
 function drawUserHand(){
     showFirstHandNumber();
@@ -145,7 +150,7 @@ function handScore(hand) {
 }
 
 function updateGlobalScore(){
-    let roundFeedBack = " ";
+    let roundFeedBack = `User score: ${userHandScore}\nCPU score: ${CpuHandScore}\n`;
 
     if(userHandScore > CpuHandScore){
         let playerScoreElement = document.querySelector("#player-score");
@@ -177,14 +182,6 @@ function initialRoundCreator(){
         userHandScore = handScore(firstUserHand);
         CpuHandScore = handScore(firstCpuHand);
         drawUserHand();
-
-        console.log("User hand:");
-        console.log(firstUserHand);
-        console.log("CPU hand:");
-        console.log(firstCpuHand);
-        console.log(deck);
-        console.log(`User score: ${userHandScore}`);
-        console.log(`CPU score: ${CpuHandScore}`);
 
     }else if(currentUserScore == POINTS_TO_WIN){
         window.alert("User Win!");
