@@ -87,6 +87,25 @@ function showFirstHandSuit(){
     }
 }
 
+function replaceCardOnClick(cardElement) {
+    // Escuchar el evento click en la carta
+    cardElement.addEventListener("click", (event)=>{
+        // Si el mazo aún tiene cartas
+        if (deck.length > 0) {
+            // Sacar una carta del mazo usando pop()
+            let newCard = deck.pop();
+            
+            // Actualizar el número y el palo de la carta
+            let numberElement = cardElement.querySelector(".number-container");
+            let suitElement = cardElement.querySelectorAll(".suit-container");
+
+            numberElement.innerHTML = newCard[INDEX_OF_NUMBER_IN_CARD];
+            suitElement.classList.add(newCard[INDEX_OF_SUIT_IN_CARD]);
+        } else {
+            window.alert("The deck is empty.");
+        }
+    });
+}
 
 function drawUserHand(){
     showFirstHandNumber();
@@ -200,3 +219,5 @@ document.querySelector("#draw-cards").addEventListener("click", (event)=>{
 document.querySelector("#reset-game").addEventListener("click", (event)=>{
     location.reload();
 })
+
+document.querySelectorAll(".card").forEach(replaceCardOnClick);
