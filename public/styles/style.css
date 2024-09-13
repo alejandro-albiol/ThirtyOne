@@ -76,7 +76,7 @@ body {
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
 
-.cardFliped {
+.card-fliped {
     background:
     repeating-linear-gradient(45deg, #11f 10%, #44f 22%);
     display: flex;

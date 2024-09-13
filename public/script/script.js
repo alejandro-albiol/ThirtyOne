@@ -208,11 +208,15 @@ function updateGlobalScore(){
     }else{
         roundFeedBack += "It's a draw.";
     }
-    window.alert(roundFeedBack);
+
+    windowElement = document.querySelector("#window-round");
+    windowElement.innerHTML = roundFeedBack;
     initialRoundCreator();
 }
 
 function initialRoundCreator(){
+    windowElement = document.querySelector("#window-round");
+
     currentUserScore = parseInt(document.querySelector("#player-score").innerHTML);
     currentCpuScore = parseInt(document.querySelector("#opponent-score").innerHTML);
 
@@ -227,15 +231,25 @@ function initialRoundCreator(){
         drawUserHand();
 
     }else if(currentUserScore == POINTS_TO_WIN){
-        window.alert("User Win!");
+        windowElement.innerHTML = "User Win!";
         document.querySelector("#end-turn").removeEventListener("click", (updateGlobalScore));
     }else{
-        window.alert("CPU Win!");
+        windowElement.innerHTML = "CPU Win!";
         document.querySelector("#end-turn").removeEventListener("click", (updateGlobalScore));
     }
 }
 
+function flipCards(){
+    
+    document.querySelectorAll(".card-fliped").forEach((cardElement) => {
+    
+        cardElement.classList.remove("card-fliped");
+        cardElement.classList.add("card");
+})
+}
+
 document.querySelector("#draw-cards").addEventListener("click", (event)=>{
+    flipCards();
     initialRoundCreator();
     document.querySelector("#end-turn").addEventListener("click", (updateGlobalScore));
 })
@@ -245,7 +259,7 @@ document.querySelector("#reset-game").addEventListener("click", (event)=>{
 })
 
 document.querySelectorAll(".card").forEach((cardElement, index) => {
-    cardElement.addEventListener("click", () => {
+    cardElement.addEventListener("click", (event) => {
         changeCard(cardElement, index);
-    });
-});
+    })
+})
