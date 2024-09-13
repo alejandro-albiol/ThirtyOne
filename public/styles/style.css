@@ -99,26 +99,22 @@ body {
     align-items: end;
 }
 
-.hearts::before{
-    content: "♥";
+.hearts{
     color: red;
     font-size: 24px;   
 }
 
-.diamonds::before{
-    content: "♦";
+.diamonds{
     color: red;
     font-size: 24px;
 }
 
-.clubs::before{
-    content: "♣";
+.clubs{
     color: black;
     font-size: 24px;
 }
 
-.spades::before{
-    content: "♠";
+.spades{
     color: black;
     font-size: 24px;
 }

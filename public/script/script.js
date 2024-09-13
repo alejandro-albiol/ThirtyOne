@@ -1,5 +1,6 @@
 const CARD_NUMBERS = [2, 3, 4, 5, 6, 7, 8, 9, 10, 'J', 'Q', 'K', 'A'];
 const CARD_SUITS = ['hearts', 'diamonds', 'clubs', 'spades'];
+const SUIT_SYMBOLS = ['♥','♦','♣','♠']
 const INDEX_OF_HEARTS_SUIT = 0;
 const INDEX_OF_DIAMONDS_SUIT = 1;
 const INDEX_OF_CLUBS_SUIT = 2;
@@ -76,7 +77,7 @@ function showFirstHandSuit(){
     let topSuitElementInCard = document.querySelectorAll(".top-suit-container");
     let bottomSuitElementInCard = document.querySelectorAll(".bottom-suit-container");
 
-    for(let i = 0; i < firstUserHand.length; i++){
+    for(let i = 0; i <= firstUserHand.length - 1; i++){
 
         topSuitElementInCard[i].classList.remove('hearts', 'diamonds', 'clubs', 'spades');
         bottomSuitElementInCard[i].classList.remove('hearts', 'diamonds', 'clubs', 'spades');
@@ -84,12 +85,51 @@ function showFirstHandSuit(){
         let suitClass = firstUserHand[i][INDEX_OF_SUIT_IN_CARD];
         topSuitElementInCard[i].classList.add(suitClass);
         bottomSuitElementInCard[i].classList.add(suitClass);
+
+        let suitClassIndex = CARD_SUITS.indexOf(firstUserHand[i][INDEX_OF_SUIT_IN_CARD]);
+
+        topSuitElementInCard[i].innerHTML = SUIT_SYMBOLS[suitClassIndex];
+        bottomSuitElementInCard[i].innerHTML = SUIT_SYMBOLS[suitClassIndex];
     }
 }
 
 function drawUserHand(){
     showFirstHandNumber();
     showFirstHandSuit();
+}
+
+function changeCard(cardElement, index) {
+
+    const EMPTY_DECK = 0;
+
+    let newCard = deck.pop();
+    firstUserHand[index] = newCard;
+
+    if(deck.length > EMPTY_DECK){
+
+        let numberElement = cardElement.querySelector(".number-container");
+        let topSuitElement = cardElement.querySelector(".top-suit-container");
+        let bottomSuitElement = cardElement.querySelector(".bottom-suit-container");
+
+        numberElement.innerHTML = newCard[INDEX_OF_NUMBER_IN_CARD];
+
+        topSuitElement.classList.remove('hearts', 'diamonds', 'clubs', 'spades');
+        bottomSuitElement.classList.remove('hearts', 'diamonds', 'clubs', 'spades');
+
+        let suitClass = newCard[INDEX_OF_SUIT_IN_CARD];
+        topSuitElement.classList.add(suitClass);
+        bottomSuitElement.classList.add(suitClass);
+
+        let suitClassIndex = CARD_SUITS.indexOf(newCard[INDEX_OF_SUIT_IN_CARD]);
+
+        topSuitElement.innerHTML = SUIT_SYMBOLS[suitClassIndex];
+        bottomSuitElement.innerHTML = SUIT_SYMBOLS[suitClassIndex];
+
+    }else{
+
+        window.alert("The deck is empty!");
+
+    }  
 }
 
 function MostCommonSuitInHand(hand, suits){
@@ -149,6 +189,10 @@ function handScore(hand) {
 }
 
 function updateGlobalScore(){
+
+    userHandScore = handScore(firstUserHand);
+    CpuHandScore = handScore(firstCpuHand);
+
     let roundFeedBack = `User score: ${userHandScore}\nCPU score: ${CpuHandScore}\n`;
 
     if(userHandScore > CpuHandScore){
@@ -200,4 +244,8 @@ document.querySelector("#reset-game").addEventListener("click", (event)=>{
     location.reload();
 })
 
-document.querySelectorAll(".card").forEach(replaceCardOnClick);
+document.querySelectorAll(".card").forEach((cardElement, index) => {
+    cardElement.addEventListener("click", () => {
+        changeCard(cardElement, index);
+    });
+});
