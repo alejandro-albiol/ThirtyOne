@@ -196,17 +196,23 @@ function updateGlobalScore(){
     let roundFeedBack = `User score: ${userHandScore}\nCPU score: ${CpuHandScore}\n`;
 
     if(userHandScore > CpuHandScore){
+
         let playerScoreElement = document.querySelector("#player-score");
         let currentUserScore = parseInt(playerScoreElement.innerHTML);
         playerScoreElement.innerHTML = currentUserScore + 1;
         roundFeedBack += "You win this round!";
+
     }else if(CpuHandScore > userHandScore){
+
         let cpuScoreElement = document.querySelector("#opponent-score");
         let currentCpuScore = parseInt(cpuScoreElement.innerHTML);
         cpuScoreElement.innerHTML = currentCpuScore + 1;
         roundFeedBack += "CPU win this round!";
+
     }else{
+
         roundFeedBack += "It's a draw.";
+
     }
 
     windowElement = document.querySelector("#window-round");
@@ -215,13 +221,17 @@ function updateGlobalScore(){
 }
 
 function initialRoundCreator(){
+
+    flipCards();
+
+
     windowElement = document.querySelector("#window-round");
 
     currentUserScore = parseInt(document.querySelector("#player-score").innerHTML);
     currentCpuScore = parseInt(document.querySelector("#opponent-score").innerHTML);
 
     if(currentCpuScore < POINTS_TO_WIN && currentUserScore < POINTS_TO_WIN){
-
+        
         deck = createDeck(NUMBER_OF_CARDS_IN_DECK);
         firstUserAndCpuHand = createFirstHand(NUMBER_OF_CARDS_IN_HAND, deck);
         firstUserHand = firstUserAndCpuHand[INDEX_OF_USER_HAND];
@@ -231,11 +241,15 @@ function initialRoundCreator(){
         drawUserHand();
 
     }else if(currentUserScore == POINTS_TO_WIN){
+
         windowElement.innerHTML = "User Win!";
         document.querySelector("#end-turn").removeEventListener("click", (updateGlobalScore));
+
     }else{
+
         windowElement.innerHTML = "CPU Win!";
         document.querySelector("#end-turn").removeEventListener("click", (updateGlobalScore));
+
     }
 }
 
@@ -243,22 +257,29 @@ function flipCards(){
     
     document.querySelectorAll(".card-fliped").forEach((cardElement) => {
     
-        cardElement.classList.remove("card-fliped");
+        cardElement.classList.toggle("card-fliped");
 })
 }
 
-document.querySelector("#draw-cards").addEventListener("click", (event)=>{
-    flipCards();
-    initialRoundCreator();
-    document.querySelector("#end-turn").addEventListener("click", (updateGlobalScore));
-})
+function disableDrawCardsButton(event) {
 
-document.querySelector("#reset-game").addEventListener("click", (event)=>{
+    initialRoundCreator();
+
+    document.querySelector("#end-turn").addEventListener("click", updateGlobalScore);
+
+    document.querySelector("#draw-cards").removeEventListener("click", disableDrawCardsButton);
+}
+
+document.querySelector("#draw-cards").addEventListener("click", disableDrawCardsButton);
+
+document.querySelector("#reset-game").addEventListener("click", (event) => {
     location.reload();
-})
+});
 
 document.querySelectorAll(".card").forEach((cardElement, index) => {
+
     cardElement.addEventListener("click", (event) => {
         changeCard(cardElement, index);
     })
+
 })
