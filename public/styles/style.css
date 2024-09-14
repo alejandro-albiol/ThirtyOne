@@ -13,8 +13,11 @@ body {
     font-size: 5em;
     color: orange;
     -webkit-text-stroke: 2px purple;
-    margin-bottom: 1.5em;
 }
+h1{
+    margin: 0%;
+}
+
 #window-round{
     display: flex;
     align-items: center;
@@ -28,14 +31,56 @@ body {
     display: flex;
     align-items: center;
     justify-content: center;
-    margin: 1.5em;
 }
-.game-container{
-    margin-top: 7em;
-    
+
+.button {
+    background-color: antiquewhite;
+    border: 2px solid #8b8b8b;
+    color: #333;
+    padding: 12px 24px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 10px;
+    border-radius: 8px;
+    cursor: pointer;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    transition: all 0.3s ease;
+    font-family: 'Arial', sans-serif;
 }
+
+.button:hover {
+    background-color: #f2e4c7;
+    color: #000;
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
+}
+
+.button-primary {
+    background-color: #f3f1e7;
+    border-color: #999;
+}
+
+#reset-game {
+    background-color: #ff6961;
+    color: #fff;
+    border: none;
+}
+
+#reset-game:hover {
+    background-color: #ff4c4c;
+}
+
+.button:disabled {
+    background-color: #dcdcdc;
+    color: #666;
+    cursor: not-allowed;
+    box-shadow: none;
+}
+
 #draw-card, #end-turn, #reset-game{
-    margin: 1.5em;
+    margin: 1em;
+    cursor: pointer;
 }
 .game-status {
     font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
@@ -43,7 +88,7 @@ body {
     -webkit-text-stroke: 0.3px purple;
     font-size: 1em;
     text-align: right;
-    margin-top: 4em;
+    margin-top: 1em;
     margin-right: 2em;
 }
 
@@ -60,6 +105,7 @@ body {
     justify-content: center;
     height: 10em;
     margin-top: 2em;
+    height: fit-content;
 }
 
 .card {
@@ -74,6 +120,7 @@ body {
     margin: 1em;
     border-radius: 8px;  
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    cursor: pointer;
 }
 
 .card-fliped {
@@ -92,39 +139,45 @@ body {
 }
 
 .number-container{
-    font-size: 80px;
+    font-size: 5em;
+    height: 60%;
+    width: 100%;
+    align-items: center;
+    align-content: center;
+    display: flex;
+    justify-content: center;
 }
 
 .suit-container{
-    font-size: 2em;
+    display: flex;
+    font-size: 3em;
+    height: 20%;
+    width: 100%;
+    align-items: center;
+    align-content: center;
+    display: flex;
 }
 
-#top-suit-container{
-    display: flex;
-    align-items: start;
+.top-suit-container{
+    flex-direction: row;
 }
 
-#bottom-suit-container{
-    display: flex;
-    align-items: end;
+.bottom-suit-container{
+    flex-direction: row-reverse;
 }
 
 .hearts{
-    color: red;
-    font-size: 24px;   
+    color: red;  
 }
 
 .diamonds{
     color: red;
-    font-size: 24px;
 }
 
 .clubs{
     color: black;
-    font-size: 24px;
 }
 
 .spades{
     color: black;
-    font-size: 24px;
 }

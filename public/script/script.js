@@ -244,7 +244,6 @@ function flipCards(){
     document.querySelectorAll(".card-fliped").forEach((cardElement) => {
     
         cardElement.classList.remove("card-fliped");
-        cardElement.classList.add("card");
 })
 }
 
