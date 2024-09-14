@@ -124,7 +124,7 @@ body {
     background:
     repeating-linear-gradient(45deg, #11f 10%, #44f 22%);
     height: 25em; 
-    width: 30%;
+    width: 20em;
     border-radius: 1em;  
     box-shadow: 1em 1em 1em black;
 }
