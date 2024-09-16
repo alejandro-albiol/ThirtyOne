@@ -13,7 +13,7 @@ body {
     font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
     font-size: 5em;
     color: orange;
-    -webkit-text-stroke: 2px purple;
+    -webkit-text-stroke: 2.5px purple;
     margin: 0%;
 }
 
@@ -84,7 +84,7 @@ body {
 .game-status {
     font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
     color: orange;
-    -webkit-text-stroke: 0.3px purple;
+    -webkit-text-stroke: 0.5px purple;
     font-size: 1em;
     text-align: right;
     margin-top: 1em;
@@ -94,7 +94,7 @@ body {
 #player-score, #opponent-score{
     font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
     color: orange;
-    -webkit-text-stroke: 0,3px purple;
+    -webkit-text-stroke: 0,5px purple;
     font-size: 1em;
 }
 
