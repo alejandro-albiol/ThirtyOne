@@ -154,7 +154,6 @@ function cpuChangeCard() {
             }
         }
     }
-    console.log(firstCpuHand)
 }
 
 function MostCommonSuitInHand(hand, suits){
