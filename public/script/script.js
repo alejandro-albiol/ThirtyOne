@@ -6,6 +6,7 @@ const INDEX_OF_DIAMONDS_SUIT = 1;
 const INDEX_OF_CLUBS_SUIT = 2;
 const INDEX_OF_SPADES_SUIT = 3;
 const NUMBER_OF_CARDS_IN_DECK = 52;
+const EMPTY_DECK = 0;
 const NUMBER_OF_CARDS_IN_HAND = 3;
 const INDEX_OF_USER_HAND = 0;
 const INDEX_OF_CPU_HAND = 1;
@@ -13,6 +14,8 @@ const INDEX_OF_NUMBER_IN_CARD = 0;
 const INDEX_OF_SUIT_IN_CARD = 1;
 const VALUE_OF_J_Q_K_CARDS = 10;
 const VALUE_OF_AS_CARD = 11;
+const MAX_POSIBLE_HANDSCORE = 31;
+const THRESHOLD_FOR_FIGURE_CARDS = 10;
 const POINTS_TO_WIN = 5;
 
 let deck, firstUserAndCpuHand, firstUserHand, firstCpuHand, userHandScore, CpuHandScore, currentCpuScore, currentUserScore, numberElementInCardElementInCard, topSuitElementInCard, botSuitElementInCard;
@@ -77,7 +80,7 @@ function showFirstHandSuit(){
     let topSuitElementInCard = document.querySelectorAll(".top-suit-container");
     let bottomSuitElementInCard = document.querySelectorAll(".bottom-suit-container");
 
-    for(let i = 0; i <= firstUserHand.length - 1; i++){
+    for(let i = 0; i < firstUserHand.length; i++){
 
         topSuitElementInCard[i].classList.remove('hearts', 'diamonds', 'clubs', 'spades');
         bottomSuitElementInCard[i].classList.remove('hearts', 'diamonds', 'clubs', 'spades');
@@ -99,8 +102,6 @@ function drawUserHand(){
 }
 
 function changeCard(cardElement, index) {
-
-    const EMPTY_DECK = 0;
 
     let newCard = deck.pop();
     firstUserHand[index] = newCard;
@@ -124,12 +125,36 @@ function changeCard(cardElement, index) {
 
         topSuitElement.innerHTML = SUIT_SYMBOLS[suitClassIndex];
         bottomSuitElement.innerHTML = SUIT_SYMBOLS[suitClassIndex];
+        
+        cpuChangeCard();
 
     }else{
 
         window.alert("The deck is empty!");
 
     }  
+}
+
+function cpuChangeCard() {
+
+    if(deck.length < EMPTY_DECK){
+
+        if (CpuHandScore < MAX_POSIBLE_HANDSCORE) {
+
+            let newCard = deck.pop();
+            let mostCommonSuitInCpuHand = MostCommonSuitInHand(firstCpuHand, CARD_SUITS);
+        
+            for (let i = 0; i < firstCpuHand.length; i++) {
+    
+                if (firstCpuHand[i][INDEX_OF_NUMBER_IN_CARD] < THRESHOLD_FOR_FIGURE_CARDS && mostCommonSuitInCpuHand != firstCpuHand[i][INDEX_OF_SUIT_IN_CARD]) {
+                    
+                    firstCpuHand[i] = newCard;
+                    break;
+                }
+            }
+        }
+    }
+    console.log(firstCpuHand)
 }
 
 function MostCommonSuitInHand(hand, suits){
@@ -172,7 +197,7 @@ function handScore(hand) {
     let majoritySuitPoints = 0;
     let maxSingleCardPoints = 0;
 
-    for (let i = 0; i < hand.length; i++) {
+    for (let i = 0; i < hand.length; i++){
         let cardValue = getCardValue(hand[i][INDEX_OF_NUMBER_IN_CARD]);
         let cardSuit = hand[i][INDEX_OF_SUIT_IN_CARD];
 
@@ -240,7 +265,7 @@ function initialRoundCreator(){
         CpuHandScore = handScore(firstCpuHand);
         drawUserHand();
 
-    }else if(currentUserScore == POINTS_TO_WIN){
+    }else if(currentUserScore >= POINTS_TO_WIN){
 
         windowElement.innerHTML = "User Win!";
         document.querySelector("#end-turn").removeEventListener("click", (updateGlobalScore));
