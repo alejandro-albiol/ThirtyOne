@@ -31,5 +31,34 @@ The game is played between two players: **the user and a CPU opponent**.
 
 To play the game locally:
 
-```bash
-git clone https://github.com/Alejandro-Albiol/Thirty-One.git
+  ```bash
+  git clone https://github.com/Alejandro-Albiol/Thirty-One.git
+  ```
+
+Then, open index.html in your web browser.
+
+🎮 How to Play
+
+  - Click "Draw Cards" to start the game.
+
+  - Click on one of your cards to swap it with a new one from the deck.
+
+  - Click "End Turn" to let the CPU play and proceed to scoring.
+
+  - The game ends when a player reaches 5 points.
+
+📁 Project Structure
+
+  - index.html – Main HTML file
+
+  - style.css – Styling and layout
+
+  - script.js – Game logic and event handling
+
+🤝 Contributing
+
+Feel free to submit issues or pull requests for improvements or bug fixes!
+
+📄 License
+
+This project is licensed under the MIT License.
