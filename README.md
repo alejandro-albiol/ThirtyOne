@@ -1,61 +1,35 @@
-﻿Thirty-One
+# Thirty-One 🃏
 
-This project implements the card game Thirty-One, a classic card game where the goal is to achieve the highest hand value possible, up to 31 points. This repository contains an interactive version of the game, developed using HTML, CSS, and JavaScript, with a visual interface and game logic implemented for the browser.
+**Thirty-One** is a browser-based implementation of the classic card game, where the goal is to achieve the highest hand value possible — up to 31 points. This interactive game was developed using HTML, CSS, and JavaScript, featuring a visual interface and complete in-browser game logic.
 
-Game Description
+## 🎯 Game Objective
 
-The objective of the game is to have a hand as close as possible to 31 points. Each player starts with three cards and, during their turn, can choose to exchange one card from their hand with one from the deck.
+The aim is to build a hand with a value as close as possible to **31 points**. Each player begins with **three cards** and can **exchange one card per turn** with a card from the deck.
 
-    Number cards (2-10) have their face value.
-    Face cards (J, Q, K) are worth 10 points.
-    The Ace is worth 11 points.
+### Card Values:
+- **2–10**: Face value
+- **J, Q, K**: 10 points
+- **Ace**: 11 points
 
-The game includes two players: the user and the CPU.
+The game is played between two players: **the user and a CPU opponent**.
 
-Features
+## ✨ Features
 
-    Deal cards: At the start of the game, 3 cards are dealt to each player.
-    Card exchange: The user can exchange one of their cards with a new one from the deck.
-    CPU card change: Whenever the user changes a card, the CPU also swaps a card if it benefits them.
-    Scoring: Each player's score is calculated based on the best combination of cards (summing cards of the same suit or the highest single card value).
-    
-    Game end: The game ends when one of the players reaches a total of 5 points.
+- 🃠 **Initial Deal**: Both players receive 3 cards at the start of the game.
+- 🔄 **Card Exchange**: The player can exchange one card per turn with a new one from the deck.
+- 🧠 **CPU Logic**: The CPU also evaluates and swaps cards to improve its hand.
+- 🧮 **Scoring System**: Score is calculated based on cards of the same suit or the highest single card.
+- 🏁 **Win Condition**: The first player to reach **5 winning rounds** wins the game.
 
-Technologies
+## 🛠️ Technologies Used
 
-This project is built using:
+- **HTML5** – Markup structure
+- **CSS3** – Styling and visual layout
+- **JavaScript** – Game mechanics, scoring logic, and interactivity
 
-    HTML5: For the structure of the content.
-    CSS3: For the visual design and game interface.
-    JavaScript: For the game logic, including card management, scores, and user interactions.
+## 🚀 Getting Started
 
-Installation and Usage
+To play the game locally:
 
-    Clone the repository:
-
-    bash
-
-    git clone https://github.com/Alejandro-Albiol/Thirty-One.git
-
-    Open the project: Open the index.html file in a web browser to start playing.
-
-How to Play
-
-    Click the "Draw Cards" button to deal the first set of cards.
-    Click on the cards to swap them with a new one from the deck.
-    Click the "End Turn" button to end your turn and update the scores.
-    The game will end when one of the players reaches 5 points.
-
-Code Structure
-
-    index.html: Main file that contains the game structure.
-    style.css: Style sheet for the visual design of the game.
-    script.js: JavaScript file that implements the game logic, including card generation, scoring, and user events.
-
-Contributions
-
-Contributions, bug reports, and suggestions are welcome! Feel free to open an issue or submit a pull request.
-
-License
-
-This project is licensed under the MIT License.
+```bash
+git clone https://github.com/Alejandro-Albiol/Thirty-One.git
